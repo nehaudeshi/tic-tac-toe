@@ -1,0 +1,17 @@
+.btn{
+    border-radius: 20px;
+    width: 150px;
+    padding: 10px;
+    box-shadow: #AEBECC 0px 4px 8px 0px;
+}
+
+.btn-blue{
+    background-color: #2B6AF7;
+    color: white;
+    margin: 20px 0 10px 0;
+}
+
+.btn-white{
+    color: #2B6AF7;
+    background-color: white;
+}

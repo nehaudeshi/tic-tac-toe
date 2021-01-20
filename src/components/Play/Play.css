@@ -1,0 +1,36 @@
+.score-grid{
+    background: white;
+    box-shadow: #AEBECC 0px 4px 8px 0px;
+    border-radius: 20px;
+    padding: 5px 0;
+}
+
+.score-grid p{
+    margin: 0;
+}
+
+.ttt-grid{
+    margin: 50px 0;
+    background: white;
+    box-shadow: #AEBECC 0px 4px 8px 0px;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.ttt-cell{
+    height: 100%
+}
+
+.ttt-cell img{
+    visibility: hidden;
+}
+
+.vertical {
+    border-left: 1px solid #CAD5E3;
+    border-right: 1px solid #CAD5E3;
+}
+
+.horizontal {
+    border-top: 1px solid #CAD5E3;
+    border-bottom: 1px solid #CAD5E3;
+}
