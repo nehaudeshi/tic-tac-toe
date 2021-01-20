@@ -6,7 +6,10 @@ const ButtonBlue = (props) => {
     return(
         <div>
              {props.src!=undefined ? 
-                <Link to={props.src} className="btn btn-blue" state={props.state}>{props.title}</Link>
+                <Link to={{
+                    pathname:props.src,
+                    state: props.state}}
+                    className="btn btn-blue">{props.title}</Link>
             :
                 <button className="btn btn-blue">{props.title}</button>
             }

@@ -9,6 +9,8 @@ const Play = (props) => {
     const [cellClicked, setCellClicked] = useState(-1)
     const [player1, setScore1] = useState(0)
     const [player2, setScore2] = useState(0)
+    const [ai, setAI] = useState()
+    const [side, setSide] = useState()
     const cell0 = React.createRef()
     const cell1 = React.createRef()
     const cell2 = React.createRef()
@@ -20,8 +22,16 @@ const Play = (props) => {
     const cell8 = React.createRef()
 
     useEffect(() => {
+        setAI(props.location.state.ai)
+        if(props.location.state.ai != undefined){
+            setSide(props.location.state.side)
+        }
+    },[])
+
+    useEffect(() => {
         if(cellClicked >= 0 && cellClicked<9){
             if(currentState[cellClicked] === "-"){
+                setCurrentState(setCharAt(currentState, cellClicked, turn))
                 if (turn === "X"){
                     checkCell(cellClicked).current.setAttribute("src","/X.png")
                     setTurn("O")
@@ -29,15 +39,17 @@ const Play = (props) => {
                     checkCell(cellClicked).current.setAttribute("src","/O.png")
                     setTurn("X")
                 }
-                setCurrentState(setCharAt(currentState, cellClicked, turn))
             } 
         }
     },[cellClicked]) 
 
     useEffect(() => {
+        //Cell Visibility
         if(cellClicked>=0){
             document.querySelectorAll(".ttt-cell img")[cellClicked].style.visibility = "unset"
         }
+
+        //Check if player has won
         for(let i=0 ;i<9; i++){
             if(currentState[i] != "-" && currentState[i] === currentState[i+3] && currentState[i+3] === currentState[i+6]){
                 setTimeout(() => winGame(currentState[i]),500)
@@ -52,7 +64,31 @@ const Play = (props) => {
         } else if(currentState[2] != "-" && currentState[2] === currentState[4] && currentState[4] === currentState[6]){
             setTimeout(() => winGame(currentState[2]),500)
         }
+
+        //AI Turn
+        if(ai && turn!=side){
+            aiPlays()
+        }
+       
     },[currentState])
+
+    function aiPlays(){
+        fetch("https://stujo-tic-tac-toe-stujo-v1.p.rapidapi.com/" + currentState + "/" + turn, {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-key": "5ccbcda7bfmsh8c3ab5cbec6b6bap155a93jsncbc675a2b6c9",
+                    "x-rapidapi-host": "stujo-tic-tac-toe-stujo-v1.p.rapidapi.com"
+            }
+        })
+        .then(result => result.json()
+        .then(response => {
+            setCellClicked(response.recommendation)
+        })
+        )
+        .catch(err => {
+            console.error(err);
+        });
+    }
 
     function setCharAt(str,index,chr) {
         if(index > str.length-1) return str;
@@ -104,7 +140,6 @@ const Play = (props) => {
         setScore2(0)
     }
 
-    console.log(props)
     return(
         <div className="container">
             <div className="row">
@@ -118,7 +153,7 @@ const Play = (props) => {
                     </div>
                 </div>
                 <div className="col-4 text-right">
-                    <p>Player 2</p>
+                    <p>{ai ? "AI" : "Player 2"}</p>
                 </div>  
             </div>
             <div className="row ttt-grid">

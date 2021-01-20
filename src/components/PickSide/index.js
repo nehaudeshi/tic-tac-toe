@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ButtonWhite from '../common/ButtonWhite'
 import './PickSide.css'
 
-const PickSide = () => {
+const PickSide = (props) => {
     const [sideSelected, selectSide] = useState("O")
 
     const changeSide = (event) => {
@@ -24,7 +24,7 @@ const PickSide = () => {
                 <input type="radio" name="sidePick" value="X" onChange={changeSide} checked={sideSelected === "X"}/>
             </div>
         </div>
-        <ButtonWhite title="Continue" src="/play" state={{side: sideSelected}}/>
+        <ButtonWhite title="Continue" src="/play" state={{side: sideSelected, ai: props.location.state.ai}}/>
     </div>
     )
 }
