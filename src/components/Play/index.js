@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Play.css'
 import ButtonBlue from '../common/ButtonBlue'
+import ButtonWhite from '../common/ButtonWhite'
 
 const Play = (props) => {
     const [turn, setTurn] = useState("O")
@@ -30,7 +31,6 @@ const Play = (props) => {
                 }
                 setCurrentState(setCharAt(currentState, cellClicked, turn))
             } 
-            
         }
     },[cellClicked]) 
 
@@ -56,7 +56,6 @@ const Play = (props) => {
 
     function setCharAt(str,index,chr) {
         if(index > str.length-1) return str;
-        console.log(str.substring(0,index) + chr + str.substring(index+1))
         return str.substring(0,index) + chr + str.substring(index+1);
     }
 
@@ -99,21 +98,27 @@ const Play = (props) => {
 
     }
 
+    function resetScore(){
+        resetClick()
+        setScore1(0)
+        setScore2(0)
+    }
+
     console.log(props)
     return(
         <div className="container">
             <div className="row">
                 <div className="col-4 text-left">
-                    <p>You</p>
+                    <p>Player 1</p>
                 </div> 
                 <div className="col-4 score-grid">
                     <div className="row">
-                        <div className="col-6 text-right border-right"><p className="score-1">{player1}</p></div>
-                        <div className="col-6 text-left"><p className="score-2">{player2}</p></div>
+                        <div className="col-6 text-right border-right"><h6 className="score-1">{player1}</h6></div>
+                        <div className="col-6 text-left"><h6 className="score-2">{player2}</h6></div>
                     </div>
                 </div>
                 <div className="col-4 text-right">
-                    <p>AI</p>
+                    <p>Player 2</p>
                 </div>  
             </div>
             <div className="row ttt-grid">
@@ -127,9 +132,12 @@ const Play = (props) => {
                 <div className="col-4 ttt-cell vertical" onClick={() => setCellClicked(7)}><img src="/o.png" ref={cell7}></img></div>
                 <div className="col-4 ttt-cell cell-8" onClick={() => setCellClicked(8)}><img src="/o.png" ref={cell8}></img></div>
             </div>
-            <span onClick={resetClick}>
-                <ButtonBlue title="Reset" />
-            </span>
+            <div onClick={resetClick}>
+                <ButtonBlue title="Reset Game" />
+            </div>
+            <div onClick={resetScore}>
+                <ButtonWhite title="Reset Score" />
+            </div>
         </div>
     )
 }

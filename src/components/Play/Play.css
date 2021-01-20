@@ -3,9 +3,10 @@
     box-shadow: #AEBECC 0px 4px 8px 0px;
     border-radius: 20px;
     padding: 5px 0;
+    height: 100%;
 }
 
-.score-grid p{
+.score-grid h6{
     margin: 0;
 }
 
