@@ -6,7 +6,8 @@ const Play = (props) => {
     const [turn, setTurn] = useState("O")
     const [currentState, setCurrentState] = useState("---------")
     const [cellClicked, setCellClicked] = useState(-1)
-    const [win, setWin] = useState(false)
+    const [player1, setScore1] = useState(0)
+    const [player2, setScore2] = useState(0)
     const cell0 = React.createRef()
     const cell1 = React.createRef()
     const cell2 = React.createRef()
@@ -83,6 +84,7 @@ const Play = (props) => {
     }
 
     function winGame(winner){
+        winner === "O" ? setScore1(prevScore => prevScore + 1) : setScore2(prevScore => prevScore + 1)
         alert(winner + " Wins the Game!")
         resetClick()
     }
@@ -91,7 +93,6 @@ const Play = (props) => {
         setTurn("O")
         setCurrentState("---------")
         setCellClicked(-1)        
-        setWin(false)
         document.querySelectorAll(".ttt-cell img").forEach((item) => {
             item.style.visibility = "hidden"
         })
@@ -107,8 +108,8 @@ const Play = (props) => {
                 </div> 
                 <div className="col-4 score-grid">
                     <div className="row">
-                        <div className="col-6 text-right border-right"><p className="score-1">0</p></div>
-                        <div className="col-6 text-left"><p className="score-2">0</p></div>
+                        <div className="col-6 text-right border-right"><p className="score-1">{player1}</p></div>
+                        <div className="col-6 text-left"><p className="score-2">{player2}</p></div>
                     </div>
                 </div>
                 <div className="col-4 text-right">
