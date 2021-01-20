@@ -25,6 +25,9 @@ const Play = (props) => {
         setAI(props.location.state.ai)
         if(props.location.state.ai != undefined){
             setSide(props.location.state.side)
+            if(props.location.state.side === "X"){
+                aiPlays()
+            }
         }
     },[])
 
@@ -119,8 +122,29 @@ const Play = (props) => {
     }
 
     function winGame(winner){
-        winner === "O" ? setScore1(prevScore => prevScore + 1) : setScore2(prevScore => prevScore + 1)
-        alert(winner + " Wins the Game!")
+        if(winner === "O"){
+            if(ai && side==="X"){
+                setScore2(prevScore => prevScore + 1)
+                alert("AI wins the game")
+            } else {
+                setScore1(prevScore => prevScore + 1)
+                alert("Player 1 wins the game")
+            }
+        } else {
+            if(ai){
+                if(side === "X"){
+                    setScore1(prevScore => prevScore + 1)
+                    alert("Player 1 wins the game")
+                } else {
+                    setScore2(prevScore => prevScore + 1)
+                    alert("AI wins the game")
+                }
+            }
+            else {
+                setScore2(prevScore => prevScore + 1)
+                alert("Player 2 wins the game")
+            }
+        }
         resetClick()
     }
 

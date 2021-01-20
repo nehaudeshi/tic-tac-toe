@@ -12,13 +12,13 @@ const PickSide = (props) => {
     return(
     <div>
         <h1>Pick Your Side</h1>
-        <div className="row pick-side" >
-            <div className="col-6">
+        <div className="row pick-side justify-content-center" >
+            <div className="col-5">
                 <img src="/o.png"/>
                 <br/>
                 <input type="radio" name="sidePick" value="O" onChange={changeSide} checked={sideSelected === "O"}/>
             </div>
-            <div className="col-6">
+            <div className="col-5">
                 <img src="/x.png"/>
                 <br/>
                 <input type="radio" name="sidePick" value="X" onChange={changeSide} checked={sideSelected === "X"}/>
