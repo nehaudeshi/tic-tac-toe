@@ -36,10 +36,10 @@ const Play = (props) => {
             if(currentState[cellClicked] === "-"){
                 setCurrentState(setCharAt(currentState, cellClicked, turn))
                 if (turn === "X"){
-                    checkCell(cellClicked).current.setAttribute("src","/X.png")
+                    checkCell(cellClicked).current.setAttribute("src","/x.png")
                     setTurn("O")
                 } else {
-                    checkCell(cellClicked).current.setAttribute("src","/O.png")
+                    checkCell(cellClicked).current.setAttribute("src","/o.png")
                     setTurn("X")
                 }
             } 
